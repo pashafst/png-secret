@@ -2,7 +2,7 @@ use crate::error::PngError;
 use core::fmt;
 use std::{convert::TryFrom, str::FromStr};
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone, Copy)]
 pub struct ChunkType([u8; 4]);
 
 fn byte_is_valid(b: u8) -> bool {
