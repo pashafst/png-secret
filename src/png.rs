@@ -1,7 +1,6 @@
 use std::fmt::Display;
 
-use crate::Result;
-use crate::{chunk::Chunk, error::PngError};
+use crate::{chunk::Chunk, error::PngError, Result};
 
 pub struct Png {
     chunks: Vec<Chunk>,
