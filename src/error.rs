@@ -4,6 +4,7 @@ use core::fmt;
 pub enum PngError {
     InvalidChunkLength(String),
     InvalidByte(u8),
+    InvalidChecksum(u32),
 }
 
 impl fmt::Display for PngError {
@@ -13,6 +14,7 @@ impl fmt::Display for PngError {
                 write!(f, "Invalid string length! The length must be 4: {}", str)
             }
             Self::InvalidByte(b) => write!(f, "Invalid byte!: {}", b),
+            Self::InvalidChecksum(crc) => write!(f, "Invalid checksum!: {}", crc),
         }
     }
 }
