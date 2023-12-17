@@ -21,6 +21,10 @@ impl TryFrom<&[u8]> for Chunk {
         let chunk_type: [u8; 4] = bytes[4..8].try_into().unwrap();
         let chunk_type = ChunkType::try_from(chunk_type).unwrap();
 
+        if !chunk_type.is_valid() {
+            return Err(PngError::InvalidChunkType(chunk_type.to_string()));
+        }
+
         let crc: [u8; 4] = bytes[bytes.len() - 4..].try_into().unwrap();
         let valid_crc: u32 = u32::from_be_bytes(crc);
 
@@ -70,7 +74,7 @@ impl Chunk {
     }
 
     pub fn data_as_string(&self) -> Result<String> {
-        Ok(String::from_utf8(self.data.clone()).unwrap())
+        Ok(String::from_utf8_lossy(&self.data).to_string())
     }
 
     pub fn length(&self) -> u32 {
