@@ -11,9 +11,13 @@ pub struct Cli {
 
 #[derive(Subcommand)]
 pub enum Command {
+    /// Encode a secret message into a png file, specified by the chunk type
     Encode(EncodeArgs),
+    /// Decode a secret message from a png file, specified by the chunk type
     Decode(DecodeArgs),
+    /// Remove a chunk type in a png file
     Remove(RemoveArgs),
+    /// Print the raw string of a png file
     Print(PrintArgs),
 }
 
