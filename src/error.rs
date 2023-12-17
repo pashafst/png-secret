@@ -4,6 +4,7 @@ use std::error::Error;
 #[derive(Debug)]
 pub enum PngError {
     InvalidChunkLength(String),
+    InvalidChunkType(String),
     InvalidByte(u8),
     InvalidChecksum(u32),
     InvalidHeader,
@@ -15,6 +16,9 @@ impl fmt::Display for PngError {
         match self {
             Self::InvalidChunkLength(str) => {
                 write!(f, "Invalid string length! The length must be 4: {}", str)
+            }
+            Self::InvalidChunkType(str) => {
+                write!(f, "Invalid chunk type! {}", str)
             }
             Self::InvalidByte(b) => write!(f, "Invalid byte!: {}", b),
             Self::InvalidChecksum(crc) => write!(f, "Invalid checksum!: {}", crc),
